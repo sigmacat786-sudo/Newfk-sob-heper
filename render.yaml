@@ -1,0 +1,22 @@
+services:
+  - type: web
+    name: sobi-link-helper-bot
+    env: docker
+    plan: free
+    envVars:
+      - key: API_ID
+        sync: false
+      - key: API_HASH
+        sync: false
+      - key: BOT_TOKEN
+        sync: false
+      - key: MONGO_URL
+        sync: false
+      - key: MONGO_DB_NAME
+        value: sobi_link_helper
+      - key: RENDER_PLAYER_BASE
+        value: https://learnwithpw-recorded.onrender.com/play?v=
+      - key: BOT_OWNER_USERNAME
+        value: "@SmartBoy_ApnaMS"
+      - key: PORT
+        value: 8000

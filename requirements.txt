@@ -1,0 +1,5 @@
+pyrogram
+tgcrypto
+Flask
+pymongo
+dnspython

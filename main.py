@@ -66,9 +66,10 @@ async def start_cmd(client: Client, message: Message):
         "Know more about how to use me send /help to Me Hurry up😘.\n\n"
         "If you know about me so just send /Sobi to me and see my magic ✨.\n\n"
         f"**Made By**: {BOT_OWNER_USERNAME}\n\n"
-        f"**Supported Websites:**"\n
+        f"**Supported Websites:**\n"
         f"https://pwthor.live\n"
-        f"https://studystark.in\n        **OR**\n"
+        f"https://studystark.in\n"
+        f"           **OR**\n"
         f"https://vidcloud.eu.org\n\n"
         f"**🔰WARNINGS🔰**\n\n"
         f"**i can use your previous Link too😥\n"

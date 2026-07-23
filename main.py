@@ -67,9 +67,7 @@ async def start_cmd(client: Client, message: Message):
         "If you know about me so just send /Sobi to me and see my magic ✨.\n\n"
         f"**Made By**: {BOT_OWNER_USERNAME}\n\n"
         f"**Supported Websites:**\n"
-        f"https://pwthor.live\n"
-        f"https://studystark.in\n"
-        f"           **OR**\n"
+        f"https://pwthor.live **And**\n"
         f"https://vidcloud.eu.org\n\n"
         f"**🔰WARNINGS🔰**\n\n"
         f"**i can use your previous Link too😥\n"
@@ -132,7 +130,7 @@ async def sobi_cmd(client: Client, message: Message):
 @app.on_message(filters.command("clear") & filters.private)
 async def clear_cmd(client: Client, message: Message):
     db.clear_session(message.from_user.id)
-    await message.reply_text("**Perfect🥸🙆🏻‍♀️ \nI deleted Our All Conversations.**")
+    await message.reply_text("**Perfect😁 \nI deleted Our All Conversations.**")
     schedule_delete(message)
 
 
@@ -342,6 +340,7 @@ async def handle_filename_input(client: Client, message: Message):
         f"Totel Url in this File: {len(entries)}\n\n"
         f"**Wanna use me again so send me /Sobi again im Here Habibi☺️.**\n"
         f"**Bot Made By**: {BOT_OWNER_USERNAME}"
+        f"**Please:** /Clear it Now!"
     )
 
     await client.send_document(chat_id, file_path, caption=caption)

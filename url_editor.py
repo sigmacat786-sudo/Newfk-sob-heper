@@ -54,6 +54,9 @@ TESTWAVE_HOST_PREFIX = re.compile(r"^https://cloudfront\.testwave\.cc/", re.IGNO
 # Always replaced with "https://d1d34p8vz63oiq.cloudfront.net/"
 SUBODH_HOST_PREFIX = re.compile(r"^https://stream\.subodhpgcollege\.site/play/", re.IGNORECASE)
 
+#and also pwthor+subodhpgcollage together wala
+PWTHOR_SUBODH_HOST_PREFIX = re.compile(r"^https://pwthorproxy\.subodhpgcollege\.site/", re.IGNORECASE)
+
 # .../master.mpd?  ->  .../master.m3u8?
 MPD_PATTERN = re.compile(r"/master\.mpd\?", re.IGNORECASE)
 
@@ -79,6 +82,10 @@ def edit_video_url(raw_url: str) -> str | None:
     # Step extra: strip Subhodpgcollage prefix if present (Type new)
     if SUBODH_HOST_PREFIX.match(url):
         url = SUBODH_HOST_PREFIX.sub("https://", url)
+
+  # Step together extra: strip PWthor and Subhodpgcollage prefix if present (Type new)
+    if PWTHOR_SUBODH_HOST_PREFIX.match(url):
+        url = PWTHOR_SUBODH_HOST_PREFIX.sub("https://d1d34p8vz63oiq.cloudfront.net/", url)
 
     # Step 1b: replace testwave host with the fixed cloudfront host (Type 7 & 8)
     if TESTWAVE_HOST_PREFIX.match(url):

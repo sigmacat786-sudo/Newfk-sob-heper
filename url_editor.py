@@ -44,6 +44,9 @@ from config import RENDER_PLAYER_BASE
 # Proxy prefix that sometimes wraps a cloudfront URL. Always replaced with "https://"
 PWTHOR_PROXY_PREFIX = re.compile(r"^https://proxy\.pwthor\.live/play/", re.IGNORECASE)
 
+# Pwthor cdn wala proxy prefix that sometimes wraps a cloudfront URL. Always replaced with "https://"
+PWTHORcdn_PROXY_PREFIX = re.compile(r"^https://pwthorcdn.b-cdn.net/", re.IGNORECASE)
+
 # testwave host that always maps to the same fixed cloudfront host.
 # Always replaced with "https://d1d34p8vz63oiq.cloudfront.net/"
 TESTWAVE_HOST_PREFIX = re.compile(r"^https://cloudfront\.testwave\.cc/", re.IGNORECASE)
@@ -90,6 +93,10 @@ def edit_video_url(raw_url: str) -> str | None:
     # Step 1b: replace testwave host with the fixed cloudfront host (Type 7 & 8)
     if TESTWAVE_HOST_PREFIX.match(url):
         url = TESTWAVE_HOST_PREFIX.sub("https://d1d34p8vz63oiq.cloudfront.net/", url)
+
+    # Step pwthor cdn wala: strip pwthor proxy prefix if present (Type 5 & 6)
+    if PWTHORcdn_PROXY_PREFIX.match(url):
+        url = PWTHORcdn_PROXY_PREFIX.sub("https://d1d34p8vz63oiq.cloudfront.net/", url)
 
     # Step 2: apply the manifest replacement
     if MPD_PATTERN.search(url):

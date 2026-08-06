@@ -338,11 +338,11 @@ async def handle_filename_input(client: Client, message: Message):
         f.write(content)
 
     caption = (
-        f"File Name: {filename}\n"
-        f"Totel Url in this File: {len(entries)}\n\n"
+        f"File Name: **{filename}**\n"
+        f"Totel Url in this File:** {len(entries)}**\n\n"
         f"**Wanna use me again so send me /Sobi again im Here Habibi☺️.**\n"
-        f"**Bot Made By**: {BOT_OWNER_USERNAME}"
-        f"**Please:** /Clear it Now!"
+        f"**Bot Made By**: {BOT_OWNER_USERNAME}\n\n"
+        f"**Please:** /Clear it Now Fasttt!"
     )
 
     await client.send_document(chat_id, file_path, caption=caption)

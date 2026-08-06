@@ -61,7 +61,7 @@ def schedule_delete(message: Message, delay: int = DELETE_DELAY):
 @app.on_message(filters.command("start") & filters.private)
 async def start_cmd(client: Client, message: Message):
     text = (
-        "**Welcome** {mention} ❤️🤭.\n"
+        "**Welcome** {user.mention} ❤️🤭.\n"
         "**send me Any Link!**\n"
         "i will edits and Create a txt file for you\n\n"
         "Know more about how to use me send /help to Me Hurry up😘.\n\n"

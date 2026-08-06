@@ -60,6 +60,7 @@ def schedule_delete(message: Message, delay: int = DELETE_DELAY):
 # ─────────────────────────────────────────────────────────────────────────────
 @app.on_message(filters.command("start") & filters.private)
 async def start_cmd(client: Client, message: Message):
+    mention = message.from_user.mention
     text = (
         f"**Welcome** {mention} ❤️🤭.\n"
         "**send me Any Link!**\n"

@@ -62,15 +62,15 @@ def schedule_delete(message: Message, delay: int = DELETE_DELAY):
 async def start_cmd(client: Client, message: Message):
     mention = message.from_user.mention
     text = (
-        f"**Welcome** {mention} ❤️🤭.\n"
+        f"**Welcome** {mention} ❤️👻.\n"
         "**send me Any Link!**\n"
         "i will edits and Create a txt file for you\n\n"
         "Know more about how to use me send /help to Me Hurry up😘.\n\n"
         "If you know about me so just send /Sobi to me and see my magic ✨.\n\n"
         f"**Made By**: {BOT_OWNER_USERNAME}\n\n"
-        f"**Supported Websites:**\n"
-        f"https://pwthor.live **And**\n"
-        f"https://vidcloud.eu.org\n\n"
+        f"Supported Websites:\n"
+        f"**https://pwthor.live** And\n"
+        f"**https://vidcloud.eu.org**\n\n"
         f"**🔰WARNINGS🔰**\n\n"
         f"**i can use your previous Link too😥\n"
         f"**So if you use me again\n**"
@@ -117,7 +117,7 @@ async def sobi_flow_start(client: Client, chat_id: int, user_id: int):
     db.set_step(user_id, "await_url")
     db.set_pending_url(user_id, None)
     db.set_pending_title(user_id, None)
-    msg = await client.send_message(chat_id, "**Yahoo😻**!\n\n**Send me Your Link! 🔗**")
+    msg = await client.send_message(chat_id, f" {mention}\n**Yahoo😻**!\n\n**Send me Your Link! 🔗**")
     schedule_delete(msg)
 
 

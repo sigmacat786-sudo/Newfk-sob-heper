@@ -82,9 +82,8 @@ async def start_cmd(client: Client, message: Message):
 # ─────────────────────────────────────────────────────────────────────────────
 # /help
 # ─────────────────────────────────────────────────────────────────────────────
-mention = message.from_user.mention
-HELP_TEXT = (
-    f"{mention}\n"
+HELP_TEXT_TEMPLATE = (
+    "{mention}\n"
     "**1.** Send me Any Link!\n"
     "**2.** Send the Title Message for your Video Title\n"
     "**3.** Send me the Image url(thumbnail url) for that video, or send "
@@ -100,10 +99,12 @@ HELP_TEXT = (
 
 @app.on_message(filters.command("help") & filters.private)
 async def help_cmd(client: Client, message: Message):
+    mention = message.from_user.mention
+    help_text = HELP_TEXT_TEMPLATE.format(mention=mention)
     markup = InlineKeyboardMarkup(
         [[InlineKeyboardButton("Let's Start🥰", callback_data="go_sobi")]]
     )
-    await message.reply_text(HELP_TEXT, reply_markup=markup)
+    await message.reply_text(help_text, reply_markup=markup)
 
 
 @app.on_callback_query(filters.regex("^go_sobi$"))
@@ -119,7 +120,8 @@ async def sobi_flow_start(client: Client, chat_id: int, user_id: int):
     db.set_step(user_id, "await_url")
     db.set_pending_url(user_id, None)
     db.set_pending_title(user_id, None)
-    mention = message.from_user.mention
+    user = await client.get_users(user_id)
+    mention = user.mention
     msg = await client.send_message(chat_id, f" {mention}\n**Yahoo😻**!\n\n**Send me Your Link! 🔗**")
     schedule_delete(msg)
 
@@ -146,7 +148,8 @@ async def clear_cmd(client: Client, message: Message):
 async def send_progress_prompt(client: Client, chat_id: int, user_id: int):
     entries = db.get_entries(user_id)
     count = len(entries)
-    mention = message.from_user.mention
+    user = await client.get_users(user_id)
+    mention = user.mention
     text = (
         f"{mention}\n"
         f"Great 😉\n"
@@ -186,7 +189,7 @@ async def create_file_callback(client: Client, cq: CallbackQuery):
     await cq.answer()
     user_id = cq.from_user.id
     db.set_step(user_id, "await_filename")
-    mention = message.from_user.mention
+    mention = cq.from_user.mention
     msg = await cq.message.reply_text(
         f"{mention}\n**Aaahaan😎\nNow Send me Txt file Name(without extension)!**"
     )

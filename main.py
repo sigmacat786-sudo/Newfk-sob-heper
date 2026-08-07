@@ -82,7 +82,9 @@ async def start_cmd(client: Client, message: Message):
 # ─────────────────────────────────────────────────────────────────────────────
 # /help
 # ─────────────────────────────────────────────────────────────────────────────
+mention = message.from_user.mention
 HELP_TEXT = (
+    f"{mention}\n"
     "**1.** Send me Any Link!\n"
     "**2.** Send the Title Message for your Video Title\n"
     "**3.** Send me the Image url(thumbnail url) for that video, or send "
@@ -117,6 +119,7 @@ async def sobi_flow_start(client: Client, chat_id: int, user_id: int):
     db.set_step(user_id, "await_url")
     db.set_pending_url(user_id, None)
     db.set_pending_title(user_id, None)
+    mention = message.from_user.mention
     msg = await client.send_message(chat_id, f" {mention}\n**Yahoo😻**!\n\n**Send me Your Link! 🔗**")
     schedule_delete(msg)
 
@@ -132,7 +135,8 @@ async def sobi_cmd(client: Client, message: Message):
 @app.on_message(filters.command("clear") & filters.private)
 async def clear_cmd(client: Client, message: Message):
     db.clear_session(message.from_user.id)
-    await message.reply_text("**Perfect😁 \nI deleted Our All Conversations.**")
+    mention = message.from_user.mention
+    await message.reply_text(f"{mention}\n**Perfect😁 \nI deleted Our All Conversations.**")
     schedule_delete(message)
 
 
@@ -142,7 +146,9 @@ async def clear_cmd(client: Client, message: Message):
 async def send_progress_prompt(client: Client, chat_id: int, user_id: int):
     entries = db.get_entries(user_id)
     count = len(entries)
+    mention = message.from_user.mention
     text = (
+        f"{mention}\n"
         f"Great 😉\n"
         f"**I saved Your Url {count} do you wanna add more?**\n\n"
         f"Or would you likes to Create txt file Now?!"
@@ -180,8 +186,9 @@ async def create_file_callback(client: Client, cq: CallbackQuery):
     await cq.answer()
     user_id = cq.from_user.id
     db.set_step(user_id, "await_filename")
+    mention = message.from_user.mention
     msg = await cq.message.reply_text(
-        "**Aaahaan😎\nNow Send me Txt file Name(without extension)!**"
+        f"{mention}\n**Aaahaan😎\nNow Send me Txt file Name(without extension)!**"
     )
     try:
         await cq.message.delete()
@@ -244,7 +251,8 @@ async def handle_url_input(client: Client, message: Message):
     db.set_pending_url(user_id, final_url)
     db.set_step(user_id, "await_title")
 
-    prompt = await message.reply_text("**Alright🥰\nNow Send Me Your Video Titel**.")
+    mention = message.from_user.mention
+    prompt = await message.reply_text(f"{mention}\n**Alright🥰\nNow Send Me Your Video Titel**.")
     schedule_delete(message)
 
 
@@ -269,8 +277,9 @@ async def handle_title_input(client: Client, message: Message):
 
     schedule_delete(message)
 
+    mention = message.from_user.mention
     prompt = await message.reply_text(
-        "**NO Send image url(thumbnail url) or\n\nYou can /Skip it ! **"
+        f"{mention}\n**NOW Send image url(thumbnail url) or\n\nYou can /Skip it ! **"
     )
     schedule_delete(prompt, delay=IMAGE_STEP_BOT_DELETE_DELAY)
 

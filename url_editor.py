@@ -47,6 +47,9 @@ PWTHOR_PROXY_PREFIX = re.compile(r"^https://proxy\.pwthor\.live/play/", re.IGNOR
 # Pwthor cdn wala proxy prefix that sometimes wraps a cloudfront URL. Always replaced with "https://"
 PWTHORcdn_PROXY_PREFIX = re.compile(r"^https://pwthorcdn.b-cdn.net/", re.IGNORECASE)
 
+# Pwthor streamthor proxy prefix that sometimes wraps a cloudfront URL. Always replaced with "https://"
+PWTHORstthor_PROXY_PREFIX = re.compile(r"^https://p01--streamthorr--8zqnnv98yzb8.code.run/", re.IGNORECASE)
+
 # testwave host that always maps to the same fixed cloudfront host.
 # Always replaced with "https://d1d34p8vz63oiq.cloudfront.net/"
 TESTWAVE_HOST_PREFIX = re.compile(r"^https://cloudfront\.testwave\.cc/", re.IGNORECASE)
@@ -97,6 +100,10 @@ def edit_video_url(raw_url: str) -> str | None:
     # Step pwthor cdn wala: strip pwthor proxy prefix if present (Type 5 & 6)
     if PWTHORcdn_PROXY_PREFIX.match(url):
         url = PWTHORcdn_PROXY_PREFIX.sub("https://d1d34p8vz63oiq.cloudfront.net/", url)
+
+   # Step pwthor streamthor(stthor): strip pwthor proxy prefix if present (Type 5 & 6)
+    if PWTHORstthor_PROXY_PREFIX.match(url):
+        url = PWTHORstthor_PROXY_PREFIX.sub("https://d1d34p8vz63oiq.cloudfront.net/", url)
 
     # Step 2: apply the manifest replacement
     if MPD_PATTERN.search(url):

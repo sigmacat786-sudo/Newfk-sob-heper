@@ -138,7 +138,7 @@ async def sobi_cmd(client: Client, message: Message):
 async def clear_cmd(client: Client, message: Message):
     db.clear_session(message.from_user.id)
     mention = message.from_user.mention
-    await message.reply_text(f"{mention}\n**Perfect😁 \nI deleted Our All Conversations.**")
+    await message.reply_text(f"{mention}\n**Perfect🥰 \nI deleted Our All Conversations.**")
     schedule_delete(message)
 
 

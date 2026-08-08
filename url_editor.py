@@ -44,7 +44,7 @@ from config import RENDER_PLAYER_BASE
 # Proxy prefix that sometimes wraps a cloudfront URL. Always replaced with "https://"
 PWTHOR_PROXY_PREFIX = re.compile(r"^https://proxy\.pwthor\.live/play/", re.IGNORECASE)
 
-PWTHOR_LONG_PROXY_PREFIX = re.compile(r"^https://p01--streamthorr--8zqnnv98yzb8.code.run/", re.IGNORECASE)
+PWTHOR_LONG_PROXY_PREFIX = re.compile(r"https://p01--streamthorr--8zqnnv98yzb8.code.run/stream/", re.IGNORECASE)
 
 # Pwthor cdn wala proxy prefix that sometimes wraps a cloudfront URL. Always replaced with "https://"
 PWTHORcdn_PROXY_PREFIX = re.compile(r"^https://pwthorcdn.b-cdn.net/", re.IGNORECASE)
@@ -89,7 +89,7 @@ def edit_video_url(raw_url: str) -> str | None:
 
    # Step 111: strip pwthor long proxy prefix if present (Type 5 & 6)
     if PWTHOR_LONG_PROXY_PREFIX.match(url):
-        url = PWTHOR_LONG_PROXY_PREFIX.sub("https://p01--streamthorr--8zqnnv98yzb8.code.run/stream/", url)
+        url = PWTHOR_LONG_PROXY_PREFIX.sub("", url)
 
     # Step extra: strip Subhodpgcollage prefix if present (Type new)
     if SUBODH_HOST_PREFIX.match(url):

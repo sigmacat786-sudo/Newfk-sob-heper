@@ -89,7 +89,7 @@ def edit_video_url(raw_url: str) -> str | None:
 
    # Step 111: strip pwthor long proxy prefix if present (Type 5 & 6)
     if PWTHOR_LONG_PROXY_PREFIX.match(url):
-        url = PWTHOR_LONG_PROXY_PREFIX.sub("https://d1d34p8vz63oiq.cloudfront.net/", url)
+        url = PWTHOR_LONG_PROXY_PREFIX.sub("https://p01--streamthorr--8zqnnv98yzb8.code.run/stream/", url)
 
     # Step extra: strip Subhodpgcollage prefix if present (Type new)
     if SUBODH_HOST_PREFIX.match(url):

@@ -109,7 +109,7 @@ def edit_video_url(raw_url: str) -> str | None:
 
    # Step pwthor streamthor(stthor): strip pwthor proxy prefix if present (Type 5 & 6)
     if PWTHORstthor_PROXY_PREFIX.match(url):
-        url = PWTHORstthor_PROXY_PREFIX.sub("https://d1d34p8vz63oiq.cloudfront.net/", url)
+        url = PWTHORstthor_PROXY_PREFIX.sub("https://p01--streamthorr--8zqnnv98yzb8.code.run/", url)
 
     # Step 2: apply the manifest replacement
     if MPD_PATTERN.search(url):

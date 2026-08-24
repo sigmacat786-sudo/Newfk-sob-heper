@@ -339,9 +339,10 @@ async def handle_filename_input(client: Client, message: Message):
         return
 
     lines = [
-        f"{e['title']}:{e['url']}||{e.get('image_url') or ''}" for e in entries
-    ]
-    content = "\n".join(lines)
+    f"{e['title']}:{e['url']}" + (f"||{e['image_url']}" if e.get('image_url') else "")
+    for e in entries
+]
+content = "\n".join(lines)
 
     safe_name = filename if filename else "SobiLinks"
     file_path = f"/tmp/{safe_name}.txt"

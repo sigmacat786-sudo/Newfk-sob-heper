@@ -68,9 +68,8 @@ async def start_cmd(client: Client, message: Message):
         "Know more about how to use me send /help to Me Hurry up😘.\n\n"
         "If you know about me so just send /Sobi to me and see my magic ✨.\n\n"
         f"**Made By**: {BOT_OWNER_USERNAME}\n\n"
-        f"Supported Websites:\n"
-        f"**https://pwthor.live** And\n"
-        f"**https://vidcloud.eu.org**\n\n"
+        f"Supported Website:\n"
+        f"**PHYSICS WALLAH**\n"
         f"**🔰WARNINGS🔰**\n\n"
         f"**i can use your previous Link too😥\n"
         f"**So if you use me again\n**"
@@ -352,7 +351,7 @@ async def handle_filename_input(client: Client, message: Message):
     caption = (
         f"File Name: **{filename}**\n"
         f"Totel Url in this File:** {len(entries)}**\n\n"
-        f"**Wanna use me again so send me /Sobi again im Here Habibi☺️.**\n"
+        f"**Wanna use me again so send me Command again im Here Habibi☺️.**\n"
         f"**Bot Made By**: {BOT_OWNER_USERNAME}\n\n"
         f"**Please:** /Clear it Now Fasttt!"
     )

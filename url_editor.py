@@ -65,6 +65,13 @@ SUBODH_HOST_PREFIX = re.compile(r"^https://stream\.subodhpgcollege\.site/play/",
 #and also pwthor+subodhpgcollage together wala
 PWTHOR_SUBODH_HOST_PREFIX = re.compile(r"^https://pwthorproxy\.subodhpgcollege\.site/", re.IGNORECASE)
 
+PWTHOR_LONNG_PROXY_PREFIX = re.compile(r"https://p01--streamthorr--fttnk8y47n9c.code.run/stream/", re.IGNORECASE)
+
+####yaha se Alag startrs #####
+#####
+###okay yaha se
+### done hu
+
 # .../master.mpd?  ->  .../master.m3u8?
 MPD_PATTERN = re.compile(r"/master\.mpd\?", re.IGNORECASE)
 
@@ -90,6 +97,9 @@ def edit_video_url(raw_url: str) -> str | None:
    # Step 111: strip pwthor long proxy prefix if present (Type 5 & 6)
     if PWTHOR_LONG_PROXY_PREFIX.match(url):
         url = PWTHOR_LONG_PROXY_PREFIX.sub("https://p01--streamthorr--8zqnnv98yzb8.code.run/stream/", url)
+
+    if PWTHOR_LONNG_PROXY_PREFIX.match(url):
+        url = PWTHOR_LONNG_PROXY_PREFIX.sub("https://p01--streamthorr--fttnk8y47n9c.code.run/stream/", url) #Double NN hai LONNG yahi diffrence hai bro.
 
     # Step extra: strip Subhodpgcollage prefix if present (Type new)
     if SUBODH_HOST_PREFIX.match(url):

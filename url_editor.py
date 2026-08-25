@@ -73,13 +73,27 @@ PWTHOR_LONNG_PROXY_PREFIX = re.compile(r"https://p01--streamthorr--fttnk8y47n9c.
 ### done hu
 
 # .../master.mpd?  ->  .../master.m3u8?
-MPD_PATTERN = re.compile(r"/master\.mpd\?", re.IGNORECASE)
+# NOTE: the "?" is now OPTIONAL — some links come with no query string at all
+# (e.g. .../master.mpd with nothing after it), and those were being rejected
+# before because the "?" was required.
+MPD_PATTERN = re.compile(r"/master\.mpd\??", re.IGNORECASE)
 
 # .../dash/<one or more path segments>/<file>.mp4?  ->  .../master.m3u8?
 # Covers: /dash/audio/2.mp4?  /dash/720/2.mp4?  /dash/720/audio/2.mp4?
 #         /dash/xxx/2.mp4?    /dash/xxx/audio/x.mp4?   etc.
 # Also tolerates a "/mp4?" (slash instead of dot before mp4) variant.
-DASH_AUDIO_PATTERN = re.compile(r"/dash/(?:[^/?]+/)+[^/?]+[./]mp4\?", re.IGNORECASE)
+# NOTE: the trailing "?" is now OPTIONAL here too, same reason as above.
+DASH_AUDIO_PATTERN = re.compile(r"/dash/(?:[^/?]+/)+[^/?]+[./]mp4\??", re.IGNORECASE)
+
+
+def _manifest_replacement(match: re.Match) -> str:
+    """
+    Build the replacement for a matched /master.mpd? or /dash/.../x.mp4?
+    Keeps the trailing "?" only if the original match actually had one,
+    so URLs with no query string don't get a stray "?" appended.
+    """
+    had_query_mark = match.group(0).endswith("?")
+    return "/master.m3u8?" if had_query_mark else "/master.m3u8"
 
 
 def edit_video_url(raw_url: str) -> str | None:
@@ -123,10 +137,10 @@ def edit_video_url(raw_url: str) -> str | None:
 
     # Step 2: apply the manifest replacement
     if MPD_PATTERN.search(url):
-        return MPD_PATTERN.sub("/master.m3u8?", url)
+        return MPD_PATTERN.sub(_manifest_replacement, url)
 
     if DASH_AUDIO_PATTERN.search(url):
-        return DASH_AUDIO_PATTERN.sub("/master.m3u8?", url)
+        return DASH_AUDIO_PATTERN.sub(_manifest_replacement, url)
 
     return None
 
